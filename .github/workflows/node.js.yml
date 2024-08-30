@@ -5,11 +5,10 @@ name: Node.js CI/CD
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     strategy:
@@ -18,14 +17,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: |
-        touch .env
-        echo "${{ secrets.PROD_ENV_FILE }}" > .env
-    - run: pm2 restart Edu-connect-api
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: |
+          touch .env
+          echo "${{ secrets.PROD_ENV_FILE }}" > .env
+      - run: npm install -g pm2
+      - run: |
+          if pm2 describe Edu-connect-api > /dev/null; then
+            pm2 restart Edu-connect-api
+          else
+            pm2 start ./src/index.js --name Edu-connect-api --node-args="-r dotenv/config --experimental-json-modules"
+          fi

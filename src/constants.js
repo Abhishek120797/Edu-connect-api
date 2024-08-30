@@ -1,1 +1,3 @@
-export const db_name = "edu-connect";
+const db_name = "edu-connect";
+
+export default db_name;

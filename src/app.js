@@ -2,6 +2,8 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import swaggerRouter from "./swagger.js";
+
 import authRoutes from "./routes/auth.route.js";
 import userUpdateRoutes from "./routes/userUpdate.route.js";
 import userRoutes from "./routes/user.route.js";
@@ -36,6 +38,8 @@ app.use(
 app.use(express.static("public"));
 
 app.use(cookieParser());
+
+app.use("/api-docs", swaggerRouter);
 
 app.use("/api/v1/auth", authRoutes);
 

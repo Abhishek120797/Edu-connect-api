@@ -11,7 +11,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: "https://www.edu-connect.online/api/v1/",
+      url: "http://www.edu-connect.online/api/v1/",
     },
   ],
 };

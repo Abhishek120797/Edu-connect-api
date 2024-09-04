@@ -25,11 +25,11 @@ import { verifyCourseCategoryTitle } from "../middlewares/courseCategory.middlew
 
 const router = Router();
 
-router.route("/").get(verifyToken, getCourse);
+router.route("/").get(getCourse);
 
 router
   .route("/:categoryTitle")
-  .get(verifyToken, verifyCourseCategoryTitle, getCourseByCategory);
+  .get(verifyCourseCategoryTitle, getCourseByCategory);
 
 //secured routes only for admin and instructor
 router

@@ -1,31 +1,31 @@
 import { Router } from "express";
 
 import {
-  verifyRegisterBody,
-  verifyLogInBody,
-  verifyToken,
-  verificationRegisterBody,
-  verificationCode,
+	verifyRegisterBody,
+	verifyLogInBody,
+	verifyToken,
+	verificationRegisterBody,
+	verificationCode,
 } from "../middlewares/auth.middleware.js";
 
 import {
-  register,
-  logIn,
-  logOut,
-  refreshAccessToken,
-  verificationRegister,
-  checkVerificationCode,
+	register,
+	logIn,
+	logOut,
+	refreshAccessToken,
+	verificationRegister,
+	checkVerificationCode,
 } from "../controllers/auth.controller.js";
 
 const router = Router();
 
 router.route("/register").post(verifyRegisterBody, register);
 router
-  .route("/register/verifyRegister")
-  .post(verificationRegisterBody, verificationRegister);
+	.route("/register/verifyRegister")
+	.post(verificationRegisterBody, verificationRegister);
 router
-  .route("/register/verifyRegister/verifyCode")
-  .post(verificationCode, checkVerificationCode);
+	.route("/register/verifyRegister/verifyCode")
+	.post(verificationCode, checkVerificationCode);
 
 router.route("/login").post(verifyLogInBody, logIn);
 

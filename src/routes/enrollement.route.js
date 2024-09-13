@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-  enrollInCourse,
-  getEnrolledCourse,
+	enrollInCourse,
+	getEnrolledCourse,
 } from "../controllers/enrollment.controller.js";
 import { verifyToken } from "../middlewares/auth.middleware.js";
 import { verifyEnrollment } from "../middlewares/enrollment.middleware.js";
